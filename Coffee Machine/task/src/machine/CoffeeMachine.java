@@ -47,6 +47,7 @@ public class CoffeeMachine {
             coffeeBeans -= 12;
             money += 6;
         }
+        System.out.println();
     }
 
     public void fill() {
@@ -62,6 +63,7 @@ public class CoffeeMachine {
         System.out.println("Write how many disposable cups of coffee do you want to add");
         input = Integer.parseInt(scan.nextLine());
         disposableCups += input;
+        System.out.println();
     }
 
     public void take() {
