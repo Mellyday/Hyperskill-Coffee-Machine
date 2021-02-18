@@ -78,12 +78,16 @@ public class CoffeeMachine {
         System.out.println("Write action (buy, fill, take)");
         String action = scan.nextLine();
 
-        if (action.equals("buy")) {
-            myCoffeeMachine.buy();
-        } else if (action.equals("fill")) {
-            myCoffeeMachine.fill();
-        } else if (action.equals("take")) {
-            myCoffeeMachine.take();
+        switch (action) {
+            case "buy":
+                myCoffeeMachine.buy();
+                break;
+            case "fill":
+                myCoffeeMachine.fill();
+                break;
+            case "take":
+                myCoffeeMachine.take();
+                break;
         }
 
         myCoffeeMachine.print();
