@@ -3,27 +3,65 @@ package machine;
 import java.util.Scanner;
 
 public class CoffeeMachine {
+    int water;
+    int milk;
+    int coffeeBeans;
+    int disposableCups;
+    int money;
+    Scanner scan;
+
+    public CoffeeMachine() {
+        water = 400;
+        milk = 540;
+        coffeeBeans = 120;
+        disposableCups = 9;
+        money = 550;
+        scan = new Scanner(System.in);
+    }
+
+    public void print() {
+        System.out.println("The coffee machine has:");
+        System.out.println(water + " of water");
+        System.out.println(milk + " of milk");
+        System.out.println(coffeeBeans + " of coffee beans");
+        System.out.println(disposableCups + " of disposable cups");
+        System.out.println(money + " of money");
+        System.out.println();
+    }
+
+    public void buy() {
+        System.out.println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:");
+        int coffeeType = Integer.parseInt(scan.nextLine());
+        if (coffeeType == 1) {
+            water -= 250;
+            coffeeBeans -= 16;
+            money += 4;
+        } else if (coffeeType == 2) {
+            water -= 350;
+            milk -= 75;
+            coffeeBeans -= 20;
+            money += 7;
+        } else if (coffeeType == 3) {
+            water -= 200;
+            milk -= 100;
+            coffeeBeans -= 12;
+            money += 6;
+        }
+    }
+
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
+        CoffeeMachine myCoffeeMachine = new CoffeeMachine();
 
-        System.out.println("Starting to make a coffee");
-        System.out.println("Grinding coffee beans");
-        System.out.println("Boiling water");
-        System.out.println("Mixing boiled water with crushed coffee beans");
-        System.out.println("Pouring coffee into the cup");
-        System.out.println("Pouring some milk into the cup");
-        System.out.println("Coffee is ready!");
+        myCoffeeMachine.print();
+        System.out.println("Write action (buy, fill, take)");
+        String action = scan.nextLine();
 
-        System.out.println("Write how many ml of water the coffee machine has:");
-        int water = Integer.parseInt(scan.nextLine());
-        System.out.println("Write how many ml of milk the coffee machine has:");
-        int milk = Integer.parseInt(scan.nextLine());
-        System.out.println("Write how many grams of coffee beans the coffee machine has:");
-        int coffeeBeans = Integer.parseInt(scan.nextLine());
-        System.out.println("Write how many cups of coffee you will need:");
-        int cups = Integer.parseInt(scan.nextLine());
+        if (action.equals("buy")) {
+            myCoffeeMachine.buy();
+        }
 
-        canMake(cups, water, milk, coffeeBeans);
+        myCoffeeMachine.print();
     }
 
     @SuppressWarnings("ConstantConditions")
@@ -45,4 +83,15 @@ public class CoffeeMachine {
                     (maxCups - cups) + " more than that)");
         }
     }
+
+    /*
+    System.out.println("Write how many ml of water the coffee machine has:");
+        int water = Integer.parseInt(scan.nextLine());
+        System.out.println("Write how many ml of milk the coffee machine has:");
+        int milk = Integer.parseInt(scan.nextLine());
+        System.out.println("Write how many grams of coffee beans the coffee machine has:");
+        int coffeeBeans = Integer.parseInt(scan.nextLine());
+        System.out.println("Write how many cups of coffee you will need:");
+        int cups = Integer.parseInt(scan.nextLine());
+     */
 }
