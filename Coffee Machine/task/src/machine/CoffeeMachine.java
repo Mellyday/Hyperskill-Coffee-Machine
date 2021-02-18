@@ -3,11 +3,7 @@ package machine;
 import java.util.Scanner;
 
 public class CoffeeMachine {
-    int water;
-    int milk;
-    int coffeeBeans;
-    int disposableCups;
-    int money;
+    int water, milk, coffeeBeans, disposableCups, money;
     Scanner scan;
 
     public CoffeeMachine() {
