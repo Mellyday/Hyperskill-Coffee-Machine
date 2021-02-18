@@ -49,6 +49,21 @@ public class CoffeeMachine {
         }
     }
 
+    public void fill() {
+        System.out.println("Write how many ml of water do you want to add");
+        int input = Integer.parseInt(scan.nextLine());
+        water += input;
+        System.out.println("Write how many ml of milk do you want to add");
+        input = Integer.parseInt(scan.nextLine());
+        milk += input;
+        System.out.println("Write how many grams of coffee beans do you want to add");
+        input = Integer.parseInt(scan.nextLine());
+        coffeeBeans += input;
+        System.out.println("Write how many disposable cups of coffee do you want to add");
+        input = Integer.parseInt(scan.nextLine());
+        disposableCups += input;
+    }
+
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         CoffeeMachine myCoffeeMachine = new CoffeeMachine();
@@ -59,6 +74,8 @@ public class CoffeeMachine {
 
         if (action.equals("buy")) {
             myCoffeeMachine.buy();
+        } else if (action.equals("fill")) {
+            myCoffeeMachine.fill();
         }
 
         myCoffeeMachine.print();
