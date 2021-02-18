@@ -35,16 +35,19 @@ public class CoffeeMachine {
         if (coffeeType == 1) {
             water -= 250;
             coffeeBeans -= 16;
+            disposableCups--;
             money += 4;
         } else if (coffeeType == 2) {
             water -= 350;
             milk -= 75;
             coffeeBeans -= 20;
+            disposableCups--;
             money += 7;
         } else if (coffeeType == 3) {
             water -= 200;
             milk -= 100;
             coffeeBeans -= 12;
+            disposableCups--;
             money += 6;
         }
         System.out.println();
