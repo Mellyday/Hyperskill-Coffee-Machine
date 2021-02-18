@@ -15,18 +15,6 @@ public class CoffeeMachine {
         scan = new Scanner(System.in);
     }
 
-    @SuppressWarnings("RedundantIfStatement")
-    public boolean enoughResources(String coffeeType) {
-        if (coffeeType.equals("1") && water >= 250 && coffeeBeans >= 16 && disposableCups >= 1) {
-            return true;
-        } else if (coffeeType.equals("2") && water >= 350 && milk >= 75 && coffeeBeans >= 20 && disposableCups >= 1) {
-            return true;
-        } else if (coffeeType.equals("3") && water >= 250 && milk >= 100 && coffeeBeans >= 12 && disposableCups >= 1) {
-            return true;
-        }
-        return false;
-    }
-
     public void print() {
         System.out.println("The coffee machine has:");
         System.out.println(water + " of water");
@@ -37,40 +25,49 @@ public class CoffeeMachine {
         System.out.println();
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     public void buy() {
         System.out.println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:");
-        String coffeeType = scan.nextLine();
-        if (coffeeType.equals("1") && enoughResources("1")) {
-            System.out.println("I have enough resources, making you a coffee!");
-            water -= 250;
-            coffeeBeans -= 16;
-            disposableCups--;
-            money += 4;
-        } else if (coffeeType.equals("2") && enoughResources("2")) {
-            System.out.println("I have enough resources, making you a coffee!");
-            water -= 350;
-            milk -= 75;
-            coffeeBeans -= 20;
-            disposableCups--;
-            money += 7;
-        } else if (coffeeType.equals("3") && enoughResources("3")) {
-            System.out.println("I have enough resources, making you a coffee!");
-            water -= 200;
-            milk -= 100;
-            coffeeBeans -= 12;
-            disposableCups--;
-            money += 6;
-        } else if (coffeeType.equals("1") && !enoughResources("1")) {
-            System.out.println("Sorry, not enough resources");
-        } else if (coffeeType.equals("2") && !enoughResources("2")) {
-            System.out.println("Sorry, not enough resources");
-        } else if (coffeeType.equals("3") && !enoughResources("3")) {
-            System.out.println("Sorry, not enough resources");
-        } else if (coffeeType.equals("back")) {
-            //do nothing
+
+        String option = scan.nextLine();
+        if (option.equals("back")) {
+            return;
         }
+
+        int coffeeType = Integer.parseInt(option);
+        if (coffeeType == 1) {
+            processBuy(250, 0, 16, 4);
+        } else if (coffeeType == 2) {
+            processBuy(350, 75, 20, 7);
+        } else if (coffeeType == 3) {
+            processBuy(200, 100, 12, 6);
+        }
+
         System.out.println();
+    }
+
+    private void processBuy(int water, int milk, int coffeeBeans, int money) {
+        if (this.water < water) {
+            System.out.println("Sorry, not enough water!");
+            return;
+        }
+        if (this.milk < milk) {
+            System.out.println("Sorry, not enough milk!");
+            return;
+        }
+        if (this.coffeeBeans < coffeeBeans) {
+            System.out.println("Sorry, not enough coffee beans!");
+            return;
+        }
+        if (this.disposableCups < 1) {
+            System.out.println("Sorry, not enough disposable cups!");
+            return;
+        }
+        System.out.println("I have enough resources, making you a coffee!");
+        this.disposableCups -= 1;
+        this.water -= water;
+        this.milk -= milk;
+        this.coffeeBeans -= coffeeBeans;
+        this.money += money;
     }
 
     public void fill() {
