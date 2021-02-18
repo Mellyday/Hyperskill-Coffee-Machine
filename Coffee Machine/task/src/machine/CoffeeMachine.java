@@ -15,6 +15,18 @@ public class CoffeeMachine {
         scan = new Scanner(System.in);
     }
 
+    @SuppressWarnings("RedundantIfStatement")
+    public boolean enoughResources(String coffeeType) {
+        if (coffeeType.equals("1") && water >= 250 && coffeeBeans >= 16 && disposableCups >= 1) {
+            return true;
+        } else if (coffeeType.equals("2") && water >= 350 && milk >= 75 && coffeeBeans >= 20 && disposableCups >= 1) {
+            return true;
+        } else if (coffeeType.equals("3") && water >= 250 && milk >= 100 && coffeeBeans >= 12 && disposableCups >= 1) {
+            return true;
+        }
+        return false;
+    }
+
     public void print() {
         System.out.println("The coffee machine has:");
         System.out.println(water + " of water");
@@ -25,26 +37,38 @@ public class CoffeeMachine {
         System.out.println();
     }
 
+    @SuppressWarnings("StatementWithEmptyBody")
     public void buy() {
         System.out.println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:");
-        int coffeeType = Integer.parseInt(scan.nextLine());
-        if (coffeeType == 1) {
+        String coffeeType = scan.nextLine();
+        if (coffeeType.equals("1") && enoughResources("1")) {
+            System.out.println("I have enough resources, making you a coffee!");
             water -= 250;
             coffeeBeans -= 16;
             disposableCups--;
             money += 4;
-        } else if (coffeeType == 2) {
+        } else if (coffeeType.equals("2") && enoughResources("2")) {
+            System.out.println("I have enough resources, making you a coffee!");
             water -= 350;
             milk -= 75;
             coffeeBeans -= 20;
             disposableCups--;
             money += 7;
-        } else if (coffeeType == 3) {
+        } else if (coffeeType.equals("3") && enoughResources("3")) {
+            System.out.println("I have enough resources, making you a coffee!");
             water -= 200;
             milk -= 100;
             coffeeBeans -= 12;
             disposableCups--;
             money += 6;
+        } else if (coffeeType.equals("1") && !enoughResources("1")) {
+            System.out.println("Sorry, not enough resources");
+        } else if (coffeeType.equals("2") && !enoughResources("2")) {
+            System.out.println("Sorry, not enough resources");
+        } else if (coffeeType.equals("3") && !enoughResources("3")) {
+            System.out.println("Sorry, not enough resources");
+        } else if (coffeeType.equals("back")) {
+            //do nothing
         }
         System.out.println();
     }
@@ -75,22 +99,28 @@ public class CoffeeMachine {
         Scanner scan = new Scanner(System.in);
         CoffeeMachine myCoffeeMachine = new CoffeeMachine();
 
-        myCoffeeMachine.print();
-        System.out.println("Write action (buy, fill, take)");
-        String action = scan.nextLine();
+        while (true) {
+            System.out.println("Write action (buy, fill, take)");
+            String action = scan.nextLine();
 
-        switch (action) {
-            case "buy":
-                myCoffeeMachine.buy();
+            if (action.equals("exit")) {
                 break;
-            case "fill":
-                myCoffeeMachine.fill();
-                break;
-            case "take":
-                myCoffeeMachine.take();
-                break;
+            }
+
+            switch (action) {
+                case "buy":
+                    myCoffeeMachine.buy();
+                    break;
+                case "fill":
+                    myCoffeeMachine.fill();
+                    break;
+                case "take":
+                    myCoffeeMachine.take();
+                    break;
+                case "remaining":
+                    myCoffeeMachine.print();
+                    break;
+            }
         }
-
-        myCoffeeMachine.print();
     }
 }
