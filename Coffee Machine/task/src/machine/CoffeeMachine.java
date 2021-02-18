@@ -64,6 +64,12 @@ public class CoffeeMachine {
         disposableCups += input;
     }
 
+    public void take() {
+        System.out.println("I gave you $" + money);
+        System.out.println();
+        money = 0;
+    }
+
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         CoffeeMachine myCoffeeMachine = new CoffeeMachine();
@@ -76,6 +82,8 @@ public class CoffeeMachine {
             myCoffeeMachine.buy();
         } else if (action.equals("fill")) {
             myCoffeeMachine.fill();
+        } else if (action.equals("take")) {
+            myCoffeeMachine.take();
         }
 
         myCoffeeMachine.print();
