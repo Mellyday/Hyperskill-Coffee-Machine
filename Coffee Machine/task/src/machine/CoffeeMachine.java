@@ -3,7 +3,6 @@ package machine;
 import java.util.Scanner;
 
 public class CoffeeMachine {
-    @SuppressWarnings("ConstantConditions")
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
 
@@ -21,23 +20,29 @@ public class CoffeeMachine {
         int milk = Integer.parseInt(scan.nextLine());
         System.out.println("Write how many grams of coffee beans the coffee machine has:");
         int coffeeBeans = Integer.parseInt(scan.nextLine());
-
         System.out.println("Write how many cups of coffee you will need:");
-        int cupsRequested = Integer.parseInt(scan.nextLine());
+        int cups = Integer.parseInt(scan.nextLine());
 
-        int maxCupsLimitedByWater = water / 200;
-        int maxCupsLimitedByMilk = milk / 50;
-        int maxCupsLimitedByCoffeeBeans = coffeeBeans / 15;
+        canMake(cups, water, milk, coffeeBeans);
+    }
+
+    @SuppressWarnings("ConstantConditions")
+    public static void canMake(int cups, int water, int milk, int coffeeBeans) {
+        final int waterPerCup = 200, milkPerCup = 50, coffeeBeansPerCup = 15;
+
+        int maxCupsLimitedByWater = water / waterPerCup;
+        int maxCupsLimitedByMilk = milk / milkPerCup;
+        int maxCupsLimitedByCoffeeBeans = coffeeBeans / coffeeBeansPerCup;
         int maxCups = Math.min(maxCupsLimitedByWater, Math.min(maxCupsLimitedByMilk,
                 maxCupsLimitedByCoffeeBeans));
 
-        if (cupsRequested == maxCups) {
+        if (cups == maxCups) {
             System.out.println("Yes, I can make that amount of coffee");
-        } else if (cupsRequested > maxCups) {
+        } else if (cups > maxCups) {
             System.out.println("No, I can make only " + maxCups + " cup(s) of coffee");
-        } else if (cupsRequested < maxCups) {
+        } else if (cups < maxCups) {
             System.out.println("Yes, I can make that amount of coffee (and even " +
-                    (maxCups - cupsRequested) + " more than that)");
+                    (maxCups - cups) + " more than that)");
         }
     }
 }
